@@ -1,0 +1,8 @@
+{
+  "name": "johnshopkins/event-importer",
+  "autoload": {
+    "psr-4": {
+      "EventImporter\\": ["src/"]
+    }
+  }
+}
