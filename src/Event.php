@@ -233,7 +233,12 @@ class Event
 
   protected function parse__end_date($value)
   {
-    $this->node->field_end_date[$this->node->language][0]["value"] = $this->getFormattedDate($value);
+    if (!$value) {
+      // use start date as end date
+      $this->node->field_end_date[$this->node->language][0]["value"] = $this->getFormattedDate($this->event["start_date"]);
+    } else {
+      $this->node->field_end_date[$this->node->language][0]["value"] = $this->getFormattedDate($value);
+    }
   }
 
   protected function parse__end_time($value)
