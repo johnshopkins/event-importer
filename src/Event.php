@@ -160,6 +160,8 @@ class Event
 
   protected function parse__ticket_info($value)
   {
+    if (!$value) return;
+
     $value = $this->addLineBreaks($value);
     $this->node->field_ticket_information[$this->node->language][0]["value"] = $value;
     $this->node->field_ticket_information[$this->node->language][0]["format"] = "markdown_enabled";
@@ -177,6 +179,8 @@ class Event
 
   protected function parse__registration_info($value)
   {
+    if (!$value) return;
+
     $value = $this->addLineBreaks($value);
     $this->node->field_registration_information[$this->node->language][0]["value"] = $value;
     $this->node->field_registration_information[$this->node->language][0]["format"] = "markdown_enabled";
@@ -184,6 +188,8 @@ class Event
 
   protected function parse__body($value)
   {
+    if (!$value) return;
+
     $value = $this->addLineBreaks($value);
     $this->node->body[$this->node->language][0]["value"]   = $value;
     $this->node->body[$this->node->language][0]["format"]  = "markdown_enabled";
@@ -191,6 +197,8 @@ class Event
 
   protected function parse__summary($value)
   {
+    if (!$value) return;
+
     $value = $this->addLineBreaks($value);
     $this->node->field_summary[$this->node->language][0]["value"] = $value;
     $this->node->field_summary[$this->node->language][0]["format"] = "markdown_enabled";
@@ -228,6 +236,8 @@ class Event
 
   protected function parse__start_time($value)
   {
+    if (!$value) return;
+
     $this->node->field_start_time[$this->node->language][0]["value"] = $value;
   }
 
@@ -243,41 +253,57 @@ class Event
 
   protected function parse__end_time($value)
   {
+    if (!$value) return;
+
     $this->node->field_end_time[$this->node->language][0]["value"] = $value;
   }
 
   protected function parse__location($value)
   {
+    if (!$value) return;
+
     $this->node->field_location[$this->node->language][0]["tid"] = $value;
   }
 
   protected function parse__additional_location_info($value)
   {
+    if (!$value) return;
+
     $this->node->field_additional_location_info[$this->node->language][0]["value"] = $value;
   }
 
   protected function parse__contact_name($value)
   {
+    if (!$value) return;
+
     $this->node->field_contact_name[$this->node->language][0]["value"] = $value;
   }
 
   protected function parse__contact_email($value)
   {
+    if (!$value) return;
+
     $this->node->field_contact_email[$this->node->language][0]["value"] = $value;
   }
 
   protected function parse__contact_phone($value)
   {
+    if (!$value) return;
+
     $this->node->field_contact_phone[$this->node->language][0]["value"] = $value;
   }
 
   protected function parse__contact_url($value)
   {
+    if (!$value) return;
+
     $this->node->field_contact_url[$this->node->language][0]["value"] = $value;
   }
 
   protected function parse__facebook_url($value)
   {
+    if (!$value) return;
+    
     $this->node->field_facebook_url[$this->node->language][0]["value"] = $value;
   }
 }
