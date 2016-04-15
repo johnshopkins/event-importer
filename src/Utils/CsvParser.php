@@ -20,9 +20,9 @@ class CsvParser
     $data = array();
 
     if ($handle !== false) {
-      while (($row = fgetcsv($handle, 1000, ",")) !== false) {
+      while (($row = fgetcsv($handle, 0, ",")) !== false) {
         $data[] = $row;
-        }
+      }
     }
 
     fclose($handle);
