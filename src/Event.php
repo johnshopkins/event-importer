@@ -201,6 +201,11 @@ class Event
     $value = preg_replace("/\s/", "", $value);
     $audiences = explode(",", $value);
 
+    // if "everyone" is one of the values, add faculty, staff, students
+    if (in_array("everyone", $audiences)) {
+      $audiences = array_merge($audiences, array("faculty", "staff", "students"));
+    }
+
     $accepted = array("faculty", "staff", "students", "everyone");
 
     // format for drupal
