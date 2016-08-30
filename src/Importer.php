@@ -40,12 +40,13 @@ class Importer
       $node = $event->get();
 
       if (!$node) {
-        echo "<strong>Event at index {$i} is missing required fields.</strong><br>";
+        echo "<strong>Event at index {$i} is missing required fields.</strong><br><br><br>";
+        continue;
       }
 
       // import into drupal
-      node_save($node);
-      echo "{$node->title} ({$node->nid}) imported.<br>";
+      // node_save($node);
+      echo "{$node->title} ({$node->nid}) imported.<br><br><br>";
     }
   }
 }
