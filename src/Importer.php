@@ -45,7 +45,7 @@ class Importer
       }
 
       // import into drupal
-      // node_save($node);
+      node_save($node);
       echo "{$node->title} ({$node->nid}) imported.<br><br><br>";
     }
   }
