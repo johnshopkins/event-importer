@@ -45,6 +45,11 @@ class Importer
       }
 
       // import into drupal
+
+      if (isset($this->settings["dryrun"])) {
+        continue;
+      }
+
       node_save($node);
       echo "{$node->title} ({$node->nid}) imported.<br><br><br>";
     }
