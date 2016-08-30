@@ -36,6 +36,7 @@ class Event
   public function get()
   {
     $this->setupBaseNode();
+
     $valid = $this->isValid($this->event);
 
     if (!$valid) return null;
@@ -113,9 +114,22 @@ class Event
   protected function addTerms($value, $taxonomy)
   {
     $value = preg_replace("/\s/", "", $value);
-    $terms = explode(",", $value);
+    if (empty($value)) return;
 
-    if (empty($terms)) return;
+    $ids = explode(",", $value);
+
+    // get valid terms
+    $loader = new Utils\TermsLoader();
+    $taxonomyMachineName = $taxonomy == "category" ? "event_categories" : $taxonomy;
+    $terms = $loader->load($taxonomyMachineName, $ids);
+
+    // log any difference
+    $diff = array_diff($ids, $terms);
+
+    if (!empty($diff)) {
+      echo "Taxonomy term(s) do not exist in {$taxonomy}: <strong>" . implode(", ", $diff) . "</strong><br>";
+      return;
+    }
 
     // format terms for drupal
     $terms = array_map(function ($term) {
@@ -262,7 +276,15 @@ class Event
   {
     if (!$value) return;
 
-    $this->node->field_location[$this->node->language][0]["tid"] = $value;
+    $loader = new Utils\TermsLoader();
+    $terms = $loader->load("locations", array($value));
+
+    if (empty($terms)) {
+      echo "Location does not exist: <strong>" . implode(", ", $value) . "</strong><br>";
+      return;
+    }
+
+    $this->node->field_location[$this->node->language][0]["tid"] = $terms[0];
   }
 
   protected function parse__additional_location_info($value)
@@ -303,7 +325,7 @@ class Event
   protected function parse__facebook_url($value)
   {
     if (!$value) return;
-    
+
     $this->node->field_facebook_url[$this->node->language][0]["value"] = $value;
   }
 }
